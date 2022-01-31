@@ -5,8 +5,11 @@ import { SignupDetailsComponent } from './components/signup-details/signup-detai
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
 
 const routes: Routes = [
-  { path: '', component: SignupFormComponent },
-  { path: 'signup-details', component: SignupDetailsComponent }
+  { path: 'signup-details', component: SignupDetailsComponent },
+  { path: 'signup-form', component: SignupFormComponent },
+  { path: '', redirectTo: 'signup-form', pathMatch: 'full' },
+  { path: '/signup-details', redirectTo: 'signup-details', pathMatch: 'full' },
+  { path: '**', redirectTo: '', pathMatch: 'full'  }
 ];
 
 @NgModule({

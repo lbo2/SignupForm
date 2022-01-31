@@ -9,6 +9,8 @@ import { SignupFormComponent } from './components/signup-form/signup-form.compon
 import { SignupDetailsComponent } from './components/signup-details/signup-details.component';
 import { FieldmatchesDirective } from './validators/fieldmatches.directive';
 import { AppRoutingModule } from './app-routing.module';
+import { PasswordPatternDirective } from './validators/password-pattern.directive';
+import { PhoneValidationDirective } from './validators/phone-validation.directive';
 
 enum RoutePaths {
   SignupForm = 'signup-form',
@@ -25,6 +27,8 @@ export const appRoutes: Routes = [
     SignupFormComponent,
     SignupDetailsComponent,
     FieldmatchesDirective,
+    PasswordPatternDirective,
+    PhoneValidationDirective,
   ],
   imports: [
     BrowserModule,

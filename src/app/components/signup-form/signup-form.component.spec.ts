@@ -103,7 +103,7 @@ describe('SignupFormComponent', () => {
   it('should validate passwords match', () => {
     // get control
     const control = getFormControl('password');
-    const control_match = getFormControl('password_match');
+    const control_match = getFormControl('confirmPassword');
 
     control && control.setValue('abc1');
     control_match && control_match.setValue('abc2');
@@ -131,17 +131,17 @@ describe('SignupFormComponent', () => {
   });
 
   it('has .form-password_match-error when password_match is invalid', () => {
-    const control = getFormControl('password_match');
+    const control = getFormControl('confirmPassword');
 
     // Make Field Valid
     control && control.setErrors(null);
     fixture.detectChanges();
-    expect(getFormError('password_match')).toBeFalsy('Error message should not be present');
+    expect(getFormError('confirmPassword')).toBeFalsy('Error message should not be present');
 
     // Make field invalid
     control && control.setErrors({ fake_error: true });
     fixture.detectChanges();
-    expect(getFormError('password_match')).toBeTruthy('Error message should be present');
+    expect(getFormError('confirmPassword')).toBeTruthy('Error message should be present');
   });
 
   /**

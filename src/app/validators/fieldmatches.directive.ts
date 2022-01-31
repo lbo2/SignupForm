@@ -1,5 +1,6 @@
-import { AbstractControl, ValidationErrors, Validator, NgModel, NG_VALIDATORS } from '@angular/forms';
+import { AbstractControl, ValidationErrors, Validator, NgModel, NG_VALIDATORS, FormGroup } from '@angular/forms';
 import { Directive, Input } from '@angular/core';
+import { CustomvalidationService } from './custom-validation.service';
 
 @Directive({
   selector: '[fieldmatches]',
@@ -9,13 +10,12 @@ import { Directive, Input } from '@angular/core';
 })
 export class FieldmatchesDirective implements Validator {
 
-  @Input('fieldmatches')
-  fieldmatches: NgModel;
+  @Input('fieldmatches') MatchPassword: string[] = [];
 
-  constructor() { }
+  constructor(private customValidator: CustomvalidationService) { }
 
-  public validate(c: AbstractControl): ValidationErrors | null {
-    return null;
+  validate(formGroup: FormGroup): ValidationErrors {
+    return this.customValidator.MatchPassword(this.MatchPassword[0], this.MatchPassword[1])(formGroup);
   }
 
   public registerOnValidatorChange(fn: () => void): void {

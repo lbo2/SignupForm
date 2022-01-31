@@ -18,33 +18,47 @@ export class SignupFormComponent implements OnInit {
   @Output()
   save = new EventEmitter<SignupData>();
 
-  model:SignupData;
+  formModel:any;
+  data:SignupData;
   countries:Country[];
   states:State[];
 
   constructor(private countriesService: CountriesService, private signupService: SignupService, private router: Router) {
   }
 
-  submit(form: NgForm) {
-
-  }
-
   async ngOnInit() {
 
-    this.model = {
+    this.formModel = {
       username: '',
       phoneNumber: '',
       email: '',
       country: '',
-      state: ''
+      state: '',
+      password: '',
+      confirmPassword: ''
     }
 
     this.countries = await this.countriesService.getCountries().toPromise();
-
-
   }
 
   async getStates(country:number) {
     this.states = await this.countriesService.getStates(country).toPromise();
+  }
+
+  async submit(form: NgForm) {
+    this.data = {
+      username: this.formModel.username,
+      phoneNumber: this.formModel.phoneNumber,
+      email: this.formModel.email,
+      state: this.formModel.state,
+      country: this.formModel.country,
+    }
+
+    const submitSubscription = this.signupService.saveData(this.data).subscribe();
+    submitSubscription.unsubscribe();
+
+    this.save.emit(this.data);
+
+    this.router.navigate(['signup-details']);
   }
 }

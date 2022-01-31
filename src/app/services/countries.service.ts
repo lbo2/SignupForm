@@ -24,10 +24,9 @@ export class CountriesService {
     const response = this.http.get<any>("../../assets/data.json")
       .pipe (
         map(items => 
-          <State[]>items.states.filter(item => {
-            console.log(item);
-            item.countryId != countryId
-          })) )
+          <State[]>items.states.filter(item => 
+            item.countryId == countryId
+          )) )
     return response;
   }
 }
